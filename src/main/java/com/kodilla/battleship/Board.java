@@ -14,11 +14,13 @@ import java.util.List;
 
 public class Board extends Parent {
 
-    private VBox rows = new VBox();
-    private boolean enemy = false;
+    final private VBox rows = new VBox();
+    final private boolean enemy;
     public int ships = 5;
 
-    public Board(boolean enemy, EventHandler<? super MouseEvent> handler){
+
+
+    public Board(boolean enemy, EventHandler<MouseEvent> handler) {
         this.enemy = enemy;
         for (int y = 0; y < 10; y++) {
             HBox row = new HBox();
@@ -31,6 +33,7 @@ public class Board extends Parent {
         }
         getChildren().add(rows);
     }
+
 
     public boolean placeShip(Ship ship, int x, int y) {
         if (canPlace(ship, x, y)) {
@@ -72,6 +75,7 @@ public class Board extends Parent {
                 new Point2D(x +1, y),
                 new Point2D(x,y-1),
                 new Point2D(x,y +1)
+
         };
         List<Cell> neighbors = new ArrayList<>();
 
@@ -105,8 +109,6 @@ public class Board extends Parent {
             if (x + length > 10)
                 return false;
             for (int i = x; i< x + length; i++) {
-                if (isValidPoint(i, y))
-                    return false;
 
                 Cell cell = getCell(i, y);
                 if (cell.ship != null)
